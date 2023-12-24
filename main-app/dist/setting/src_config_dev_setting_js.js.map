@@ -1,0 +1,1 @@
+{"version":3,"file":"src_config_dev_setting_js.js","mappings":";;;;;;;;;;;;;AAAA,iEAAe;AACf;AACA","sources":["webpack://main-app/./src/config/dev/setting.js"],"sourcesContent":["export default {\r\n    env: 'dev'\r\n}"],"names":[],"sourceRoot":""}

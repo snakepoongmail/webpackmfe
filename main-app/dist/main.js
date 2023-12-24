@@ -25,30 +25,6 @@ module.exports = new Promise((resolve, reject) => {
 
 /***/ }),
 
-/***/ "webpack/container/reference/config-app":
-/*!******************************************************************!*\
-  !*** external "config_app@http://localhost:3003/remoteEntry.js" ***!
-  \******************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-var __webpack_error__ = new Error();
-module.exports = new Promise((resolve, reject) => {
-	if(typeof config_app !== "undefined") return resolve();
-	__webpack_require__.l("http://localhost:3003/remoteEntry.js", (event) => {
-		if(typeof config_app !== "undefined") return resolve();
-		var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-		var realSrc = event && event.target && event.target.src;
-		__webpack_error__.message = 'Loading script failed.\n(' + errorType + ': ' + realSrc + ')';
-		__webpack_error__.name = 'ScriptExternalLoadError';
-		__webpack_error__.type = errorType;
-		__webpack_error__.request = realSrc;
-		reject(__webpack_error__);
-	}, "config_app");
-}).then(() => (config_app));
-
-/***/ }),
-
 /***/ "webpack/container/reference/lib-app":
 /*!***************************************************************!*\
   !*** external "lib_app@http://localhost:3000/remoteEntry.js" ***!
@@ -70,6 +46,30 @@ module.exports = new Promise((resolve, reject) => {
 		reject(__webpack_error__);
 	}, "lib_app");
 }).then(() => (lib_app));
+
+/***/ }),
+
+/***/ "webpack/container/reference/local-app":
+/*!****************************************************!*\
+  !*** external "local_app@/setting/remoteEntry.js" ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+var __webpack_error__ = new Error();
+module.exports = new Promise((resolve, reject) => {
+	if(typeof local_app !== "undefined") return resolve();
+	__webpack_require__.l("/setting/remoteEntry.js", (event) => {
+		if(typeof local_app !== "undefined") return resolve();
+		var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+		var realSrc = event && event.target && event.target.src;
+		__webpack_error__.message = 'Loading script failed.\n(' + errorType + ': ' + realSrc + ')';
+		__webpack_error__.name = 'ScriptExternalLoadError';
+		__webpack_error__.type = errorType;
+		__webpack_error__.request = realSrc;
+		reject(__webpack_error__);
+	}, "local_app");
+}).then(() => (local_app));
 
 /***/ })
 
@@ -219,7 +219,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 				"webpack/container/remote/component-app/Button",
 /******/ 				"webpack/container/remote/component-app/Dialog",
 /******/ 				"webpack/container/remote/component-app/ToolTip",
-/******/ 				"webpack/container/remote/config-app/Setting",
+/******/ 				"webpack/container/remote/local-app/Setting",
 /******/ 				"webpack/container/remote/lib-app/react-dom"
 /******/ 			]
 /******/ 		};
@@ -244,10 +244,10 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 				"./ToolTip",
 /******/ 				"webpack/container/reference/component-app"
 /******/ 			],
-/******/ 			"webpack/container/remote/config-app/Setting": [
+/******/ 			"webpack/container/remote/local-app/Setting": [
 /******/ 				"default",
 /******/ 				"./Setting",
-/******/ 				"webpack/container/reference/config-app"
+/******/ 				"webpack/container/reference/local-app"
 /******/ 			],
 /******/ 			"webpack/container/remote/lib-app/react-dom": [
 /******/ 				"default",
@@ -342,8 +342,8 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 			switch(name) {
 /******/ 				case "default": {
 /******/ 					initExternal("webpack/container/reference/component-app");
-/******/ 					initExternal("webpack/container/reference/config-app");
 /******/ 					initExternal("webpack/container/reference/lib-app");
+/******/ 					initExternal("webpack/container/reference/local-app");
 /******/ 				}
 /******/ 				break;
 /******/ 			}

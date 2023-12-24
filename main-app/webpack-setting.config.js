@@ -3,11 +3,12 @@ const env = process.env.env;
 const path = require('path');
 console.log(`print env: ${env}`);
 module.exports = {
-    entry: "./index.js",
+    entry: "./setting-index.js",
     mode: "development",
     devtool:"hidden-source-map",
     output: {
-        publicPath: "http://localhost:3003/",
+        // publicPath: "http://localhost:3003/",
+        path: path.resolve(__dirname, "dist","setting"),
         clean:true
     },
     resolve:{
@@ -16,7 +17,7 @@ module.exports = {
    
     plugins: [
         new ModuleFederationPlugin({
-            name: "config_app",
+            name: "local_app",       
             filename: "remoteEntry.js",
             exposes: {
               "./Setting": `./src/config/${env}/setting.js`

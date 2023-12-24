@@ -3,7 +3,8 @@ import Button from 'component-app/Button'
 import Dialog from 'component-app/Dialog'
 import ToolTip from "component-app/ToolTip"
 // import Setting from 'component-app/Setting'
-import Setting from 'config-app/Setting'
+// import Setting from 'config-app/Setting'
+import Setting from 'local-app/Setting'
 export default class App extends React.Component{
     constructor(props) {
       super(props)
