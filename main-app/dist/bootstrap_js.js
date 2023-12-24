@@ -1,3 +1,4 @@
+"use strict";
 (self["webpackChunkmain_app"] = self["webpackChunkmain_app"] || []).push([["bootstrap_js"],{
 
 /***/ "./App.jsx":
@@ -6,7 +7,6 @@
   \*****************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ App)
@@ -19,8 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var component_app_Dialog__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(component_app_Dialog__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var component_app_ToolTip__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! component-app/ToolTip */ "webpack/container/remote/component-app/ToolTip");
 /* harmony import */ var component_app_ToolTip__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(component_app_ToolTip__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var config_app_Setting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! config-app/Setting */ "webpack/container/remote/config-app/Setting");
+/* harmony import */ var config_app_Setting__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(config_app_Setting__WEBPACK_IMPORTED_MODULE_4__);
 
 
+
+ // import Setting from 'component-app/Setting'
 
 
 class App extends (lib_app_react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
@@ -59,7 +63,7 @@ class App extends (lib_app_react__WEBPACK_IMPORTED_MODULE_0___default().Componen
     }), /*#__PURE__*/lib_app_react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "hover me please!"), /*#__PURE__*/lib_app_react__WEBPACK_IMPORTED_MODULE_0___default().createElement((component_app_ToolTip__WEBPACK_IMPORTED_MODULE_3___default()), {
       content: "hover me please",
       message: "Hello,world!"
-    }));
+    }), (config_app_Setting__WEBPACK_IMPORTED_MODULE_4___default().env));
   }
 
 }
@@ -72,7 +76,6 @@ class App extends (lib_app_react__WEBPACK_IMPORTED_MODULE_0___default().Componen
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.jsx */ "./App.jsx");
 /* harmony import */ var lib_app_react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lib-app/react-dom */ "webpack/container/remote/lib-app/react-dom");
@@ -82,7 +85,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-lib_app_react_dom__WEBPACK_IMPORTED_MODULE_1___default().render( /*#__PURE__*/lib_app_react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_App_jsx__WEBPACK_IMPORTED_MODULE_0__.default, null), document.getElementById("app"));
+lib_app_react_dom__WEBPACK_IMPORTED_MODULE_1___default().render( /*#__PURE__*/lib_app_react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_App_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null), document.getElementById("app"));
 
 /***/ })
 

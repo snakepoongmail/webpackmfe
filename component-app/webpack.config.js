@@ -40,7 +40,8 @@ module.exports = {
               "./Button":"./src/Button.jsx",
               "./Dialog":"./src/Dialog.jsx",
               "./Logo":"./src/Logo.jsx",
-              "./ToolTip":"./src/ToolTip.jsx"
+              "./ToolTip":"./src/ToolTip.jsx",
+              "./Setting": "./src/config/sit/setting.js"
             },
             remotes:{
                 "lib-app":"lib_app@http://localhost:3000/remoteEntry.js"

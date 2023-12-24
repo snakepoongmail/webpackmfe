@@ -25,6 +25,30 @@ module.exports = new Promise((resolve, reject) => {
 
 /***/ }),
 
+/***/ "webpack/container/reference/config-app":
+/*!******************************************************************!*\
+  !*** external "config_app@http://localhost:3003/remoteEntry.js" ***!
+  \******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+var __webpack_error__ = new Error();
+module.exports = new Promise((resolve, reject) => {
+	if(typeof config_app !== "undefined") return resolve();
+	__webpack_require__.l("http://localhost:3003/remoteEntry.js", (event) => {
+		if(typeof config_app !== "undefined") return resolve();
+		var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+		var realSrc = event && event.target && event.target.src;
+		__webpack_error__.message = 'Loading script failed.\n(' + errorType + ': ' + realSrc + ')';
+		__webpack_error__.name = 'ScriptExternalLoadError';
+		__webpack_error__.type = errorType;
+		__webpack_error__.request = realSrc;
+		reject(__webpack_error__);
+	}, "config_app");
+}).then(() => (config_app));
+
+/***/ }),
+
 /***/ "webpack/container/reference/lib-app":
 /*!***************************************************************!*\
   !*** external "lib_app@http://localhost:3000/remoteEntry.js" ***!
@@ -155,6 +179,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 					script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 				}
 /******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
+/******/ 		
 /******/ 				script.src = url;
 /******/ 			}
 /******/ 			inProgress[url] = [done];
@@ -168,7 +193,6 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 				doneFns && doneFns.forEach((fn) => (fn(event)));
 /******/ 				if(prev) return prev(event);
 /******/ 			}
-/******/ 			;
 /******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
 /******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
 /******/ 			script.onload = onScriptComplete.bind(null, script.onload);
@@ -195,6 +219,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 				"webpack/container/remote/component-app/Button",
 /******/ 				"webpack/container/remote/component-app/Dialog",
 /******/ 				"webpack/container/remote/component-app/ToolTip",
+/******/ 				"webpack/container/remote/config-app/Setting",
 /******/ 				"webpack/container/remote/lib-app/react-dom"
 /******/ 			]
 /******/ 		};
@@ -219,6 +244,11 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 				"./ToolTip",
 /******/ 				"webpack/container/reference/component-app"
 /******/ 			],
+/******/ 			"webpack/container/remote/config-app/Setting": [
+/******/ 				"default",
+/******/ 				"./Setting",
+/******/ 				"webpack/container/reference/config-app"
+/******/ 			],
 /******/ 			"webpack/container/remote/lib-app/react-dom": [
 /******/ 				"default",
 /******/ 				"./react-dom",
@@ -238,7 +268,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 						if(!error) error = new Error("Container missing");
 /******/ 						if(typeof error.message === "string")
 /******/ 							error.message += '\nwhile loading "' + data[1] + '" from ' + data[2];
-/******/ 						__webpack_modules__[id] = () => {
+/******/ 						__webpack_require__.m[id] = () => {
 /******/ 							throw error;
 /******/ 						}
 /******/ 						data.p = 0;
@@ -260,7 +290,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 					var onInitialized = (_, external, first) => (handleFunction(external.get, data[1], getScope, 0, onFactory, first));
 /******/ 					var onFactory = (factory) => {
 /******/ 						data.p = 1;
-/******/ 						__webpack_modules__[id] = (module) => {
+/******/ 						__webpack_require__.m[id] = (module) => {
 /******/ 							module.exports = factory();
 /******/ 						}
 /******/ 					};
@@ -288,7 +318,9 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 			if(!__webpack_require__.o(__webpack_require__.S, name)) __webpack_require__.S[name] = {};
 /******/ 			// runs all init snippets from all modules reachable
 /******/ 			var scope = __webpack_require__.S[name];
-/******/ 			var warn = (msg) => (typeof console !== "undefined" && console.warn && console.warn(msg));
+/******/ 			var warn = (msg) => {
+/******/ 				if (typeof console !== "undefined" && console.warn) console.warn(msg);
+/******/ 			};
 /******/ 			var uniqueName = "main-app";
 /******/ 			var register = (name, version, factory, eager) => {
 /******/ 				var versions = scope[name] = scope[name] || {};
@@ -303,13 +335,14 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 					var initFn = (module) => (module && module.init && module.init(__webpack_require__.S[name], initScope))
 /******/ 					if(module.then) return promises.push(module.then(initFn, handleError));
 /******/ 					var initResult = initFn(module);
-/******/ 					if(initResult && initResult.then) return promises.push(initResult.catch(handleError));
+/******/ 					if(initResult && initResult.then) return promises.push(initResult['catch'](handleError));
 /******/ 				} catch(err) { handleError(err); }
 /******/ 			}
 /******/ 			var promises = [];
 /******/ 			switch(name) {
 /******/ 				case "default": {
 /******/ 					initExternal("webpack/container/reference/component-app");
+/******/ 					initExternal("webpack/container/reference/config-app");
 /******/ 					initExternal("webpack/container/reference/lib-app");
 /******/ 				}
 /******/ 				break;
@@ -369,7 +402,7 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 								}
 /******/ 							};
 /******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
-/******/ 						} else installedChunks[chunkId] = 0;
+/******/ 						}
 /******/ 					}
 /******/ 				}
 /******/ 		};
@@ -390,19 +423,21 @@ module.exports = new Promise((resolve, reject) => {
 /******/ 			// add "moreModules" to the modules object,
 /******/ 			// then flag all "chunkIds" as loaded and fire callback
 /******/ 			var moduleId, chunkId, i = 0;
-/******/ 			for(moduleId in moreModules) {
-/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
 /******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
 /******/ 			}
-/******/ 			if(runtime) var result = runtime(__webpack_require__);
 /******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
 /******/ 			for(;i < chunkIds.length; i++) {
 /******/ 				chunkId = chunkIds[i];
 /******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 					installedChunks[chunkId][0]();
 /******/ 				}
-/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 				installedChunks[chunkId] = 0;
 /******/ 			}
 /******/ 		
 /******/ 		}

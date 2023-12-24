@@ -2,6 +2,8 @@ import React from 'lib-app/react';
 import Button from 'component-app/Button'
 import Dialog from 'component-app/Dialog'
 import ToolTip from "component-app/ToolTip"
+// import Setting from 'component-app/Setting'
+import Setting from 'config-app/Setting'
 export default class App extends React.Component{
     constructor(props) {
       super(props)
@@ -42,6 +44,7 @@ export default class App extends React.Component{
         <Dialog switchVisible={this.HanldeSwitchVisible} visible={this.state.dialogVisible}/>
         <h4>hover me please!</h4>
         <ToolTip content="hover me please" message="Hello,world!"/>
+        {Setting.env}
       </div>)
     }
   }

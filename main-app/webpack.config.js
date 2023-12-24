@@ -33,7 +33,8 @@ module.exports = {
             name: "main_app",
             remotes:{
                 "lib-app":"lib_app@http://localhost:3000/remoteEntry.js",
-                "component-app":"component_app@http://localhost:3001/remoteEntry.js"
+                "component-app":"component_app@http://localhost:3001/remoteEntry.js",
+                "config-app":"config_app@http://localhost:3003/remoteEntry.js"
             },
         }),
         new HtmlWebpackPlugin({

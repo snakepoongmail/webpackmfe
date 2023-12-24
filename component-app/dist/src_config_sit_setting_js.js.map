@@ -1,0 +1,1 @@
+{"version":3,"file":"src_config_sit_setting_js.js","mappings":";;;;;;;;;;;;;AAAA,iEAAe;AACXA,EAAAA,GAAG,EAAE;AADM,CAAf","sources":["webpack://component-app/./src/config/sit/setting.js"],"sourcesContent":["export default {\r\n    env: 'sit'\r\n}"],"names":["env"],"sourceRoot":""}
